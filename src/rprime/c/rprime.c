@@ -7,7 +7,7 @@
 #include <math.h>
 
 #define assign(p,v,g) {p->value=v; p->length=g;}
-int v100[]={2,3,4,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
+int v100[]={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
 
 typedef struct _vector{
     int *value;
@@ -137,8 +137,11 @@ int main(int argc, char**  argv){
     if(argc != 2){
         errorMessage("Usage: ./rprime n\n");
     }
-    int n = atoi(argv[1]); 
-    printVector(rprime(n));
+    int n = atoi(argv[1]);
+    // time_start
+    vector* p = rprime(n);
+    // time_end
+    printVector(p);
     return 0;
 }
 
