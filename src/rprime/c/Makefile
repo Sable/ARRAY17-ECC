@@ -5,4 +5,4 @@ all:
 	$(CC) rprime.c -o rprime $(CFLAG)
 
 clean:
-	make -f *.o rprime
+	rm -f *.o rprime
