@@ -51,7 +51,7 @@ array* scan(array* a){
     array* t;
     dim0 = a->dim0;
     dim1 = a->dim1;
-    initArray(t);
+    initArray(t, dim0, dim1);
     for(i=0; i<dim0; i++){
         t->value[i*dim1] = a->value[i*dim1];
         for(j=1; j<dim1; j++){
@@ -64,7 +64,7 @@ array* scan(array* a){
 
 array* drop(int x0, array* a){
     int i,j,count;
-    int dim0,dim1;
+    int dim0,dim1,newDim1;
     array *t;
     dim0 = a->dim0;
     dim1 = a->dim1;
@@ -147,7 +147,7 @@ array* plus(array *a, array *b){
 }
 
 array* msum(int n, array *a){
-    array *t,*t0,*t1; 
+    array *t,*t0,*t1,*r; 
     t  = scan(a);
     t0 = concat(drop(-n,t));
     t1 = drop(n-1,t);
@@ -180,7 +180,7 @@ array* multiply(array *a, array *b){
     array *t;
     dim0 = a->dim0;
     dim1 = a->dim1;
-    t = initArray(t, dim0, dim1);
+    initArray(t, dim0, dim1);
     for(i=0; i<dim0; i++){
         for(j=0; j<dim1; j++){
             t->value[i*dim1+j] =
@@ -204,6 +204,21 @@ array* divide(array *a, double c){
     return t;
 }
 
+array* divideArray(array *a, array *b){
+    int i,j,dim0,dim1;
+    array *t;
+    dim0 = a->dim0;
+    dim1 = a->dim1;
+    initArray(t, dim0, dim1);
+    for(i=0; i<dim0; i++){
+        for(j=0; j<dim1; j++){
+            t->value[i*dim1+j] = a->value[i*dim1+j]/b->value[i*dim1+j];
+        }
+    }
+    return t;
+}
+
+
 array* absolute(array *a){
     int i,j,dim0,dim1;
     array *t;
@@ -220,7 +235,8 @@ array* absolute(array *a){
 
 array* morgan(int n, array *x, array *y){
     array *sx,*sx2,*sy,*sy2,*sxy;
-    array *t0,*t1,*part0,*part1,*part2;
+    array *t0,*t1,*t2,*part0,*part1,*part2;
+    array *r;
     sx = msum(n, x);
     sy = msum(n, y);
     sx2 = msum(n, power(x, 2));
@@ -247,7 +263,7 @@ array* morgan(int n, array *x, array *y){
     part2 = minus(t0, t1); tryFreeArray(t0); tryFreeArray(t1);
     // r
     t0 = multiply(part0, part1);
-    r  = divide(part2, t0);
+    r  = divideArray(part2, t0);
     tryFreeArray(t0);
     tryFreeArray(part0);
     tryFreeArray(part1);
