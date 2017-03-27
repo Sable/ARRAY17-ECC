@@ -1,8 +1,8 @@
 #!/bin/bash
 
-SETSIZE=(1 2 4 8 )
+SETSIZE=( 1 2 4 8 )
 NUMITER=5
-LOGFILE=run1.log
+LOGFILE=result_blackscholes.log
 
 rm -f $LOGFILE
 
@@ -12,7 +12,7 @@ do
     echo "echo $NUMITER >> ${LOGFILE}"
     for i in $(seq 1 $NUMITER)
     do
-        echo "./blackscholes 1 in_${k}M.txt data/in_${k}M.txt data/out_${k}M.txt grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}"
+        echo "./blackscholes 1 in_${k}M.txt data/in_${k}M.txt data/out_${k}M.txt | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}"
     done
 done
 
