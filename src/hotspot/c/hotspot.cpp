@@ -263,7 +263,9 @@ int main(int argc, char **argv)
 	printf("Start computing the transient temperature\n");
 	compute_tran_temp(result,sim_time, temp, power, grid_rows, grid_cols);
 	printf("Ending simulation\n");
-	printf("eclapsed time(average): %lfms (total %d times)\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/sim_time*1000,sim_time); //
+	//printf("eclapsed time(average): %lfms (total %d times)\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/sim_time*1000,sim_time); //
+	printf("The eclapsed time (ms): %lf\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/sim_time*1000);
+    printf("Total: %d\n",sim_time);
 	/* output results	*/
 #ifdef VERBOSE
 	fprintf(stdout, "Final Temperatures:\n");

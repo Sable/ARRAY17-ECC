@@ -92,9 +92,9 @@ void usage(char *argv0) {
         "       -b                 	: input file is in binary format\n"
 		"       -k                 	: number of clusters (default is 5) \n"
         "       -t threshold		: threshold value\n"
-		"       -n no. of threads	: number of threads";
+		"       -n no. of threads	: number of threads\n";
     fprintf(stderr, help, argv0);
-    exit(-1);
+    exit(1);
 }
 
 /*---< main() >-------------------------------------------------------------*/
@@ -233,7 +233,7 @@ int main(int argc, char **argv) {
         printf("\n\n");
     }
 */
-	printf("Time for process: %f ms\n", timing*1000);
+	printf("The elapsed time (ms): %f\n", timing*1000);
 
     free(attributes);
     free(cluster_centres[0]);

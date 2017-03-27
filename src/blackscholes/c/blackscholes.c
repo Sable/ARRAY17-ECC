@@ -474,7 +474,7 @@ int main (int argc, char **argv)
     __parsec_roi_end();
 #endif
     printf("%d\n",CLOCKS_PER_SEC);
-    printf("eclapsed time: %lfms\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/NUM_RUNS*1000);
+    printf("The eclapsed time (ms): %lf\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/NUM_RUNS*1000);
     //Write prices to output file
     file = fopen(outputFile, "w");
     if(file == NULL) {

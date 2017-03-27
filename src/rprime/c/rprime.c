@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include <sys/time.h>
+
 
 #define assign(p,v,g) {p->value=v; p->length=g;}
 int v100[]={2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97};
@@ -133,14 +135,21 @@ L1:
     return p;
 }
 
+double getTime(struct timeval tv1, struct timeval tv2){
+    return ((double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +
+            (double) (tv2.tv_sec - tv1.tv_sec));
+}
+
 int main(int argc, char**  argv){
     if(argc != 2){
         errorMessage("Usage: ./rprime n\n");
     }
     int n = atoi(argv[1]);
-    // time_start
+    struct timeval tv1, tv2;
+    gettimeofday(&tv1, NULL);  // time_start
     vector* p = rprime(n);
-    // time_end
+    gettimeofday(&tv2, NULL);  // time_end
+    printf("The elapsed time (ms): %lf\n", getTime(tv1,tv2));
     printVector(p);
     return 0;
 }

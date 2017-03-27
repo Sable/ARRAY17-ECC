@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <sys/time.h>
 
 typedef struct{
     double *value;
@@ -297,18 +298,25 @@ void printArray(array *r){
     printf("[dim = (%d, %d)]\n", dim0, dim1);
 }
 
+double getTime(struct timeval tv1, struct timeval tv2){
+    return ((double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +
+            (double) (tv2.tv_sec - tv1.tv_sec));
+}
+
 int main(int argc, char**  argv){
     if(argc != 1){
         errorMessage("Usage: ./rprime < file.txt \n");
     }
     int n; 
     array *x, *y;
+    struct timeval  tv1, tv2;
     scanf("%d",&n);
     x = loadArray();
     y = loadArray();
-    // time_start
+    gettimeofday(&tv1, NULL);  // time_start
     array* r = morgan(n, x, y);
-    // time_end
+    gettimeofday(&tv2, NULL);  // time_end
+    printf("The elapsed time (ms): %lf\n", getTime(tv1,tv2));
     printArray(r);
     tryFreeArray(x);
     tryFreeArray(y);
