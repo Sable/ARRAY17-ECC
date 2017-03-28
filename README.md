@@ -85,8 +85,10 @@ Source: [Rodinia 2.3](http://lava.cs.virginia.edu/Rodinia/)
 
 ### RPrime
 
+Scale: 100000 200000 400000 800000
+
 - [x] C
-- [ ] ELI
+- [x] ELI
 - [ ] ECC
 
 ## Feedback
