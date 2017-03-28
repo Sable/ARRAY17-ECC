@@ -8,11 +8,12 @@ rm -f $LOGFILE
 
 for k in "${SETSIZE[@]}"
 do
-    echo "echo # Input with temp_$k and power_$k >> ${LOGFILE}"
-    echo "echo $NUMITER >> ${LOGFILE}"
+    echo "# Input with temp_$k and power_$k" >> ${LOGFILE}
+    echo $NUMITER >> ${LOGFILE}
+    ./kmeans -i data/kmeans${k}K -n 1 > /dev/null 2>&1
     for i in $(seq 1 $NUMITER)
     do
-        echo "./kmeans -i data/kmeans${k}K -n 1 | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}"
+        ./kmeans -i data/kmeans${k}K -n 1 | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}
     done
 done
 

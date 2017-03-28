@@ -474,7 +474,7 @@ int main (int argc, char **argv)
     __parsec_roi_end();
 #endif
     printf("%d\n",CLOCKS_PER_SEC);
-    printf("The eclapsed time (ms): %lf\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/NUM_RUNS*1000);
+    printf("The elapsed time (ms): %lf\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/NUM_RUNS*1000);
     //Write prices to output file
     file = fopen(outputFile, "w");
     if(file == NULL) {
@@ -487,13 +487,15 @@ int main (int argc, char **argv)
       fclose(file);
       exit(1);
     }
-    for(i=0; i<numOptions; i++) {
-      rv = fprintf(file, "%.18f\n", prices[i]);
-      if(rv < 0) {
-        printf("ERROR: Unable to write to file `%s'.\n", outputFile);
-        fclose(file);
-        exit(1);
-      }
+    if(1==0){
+        for(i=0; i<numOptions; i++) {
+            rv = fprintf(file, "%.18f\n", prices[i]);
+            if(rv < 0) {
+                printf("ERROR: Unable to write to file `%s'.\n", outputFile);
+                fclose(file);
+                exit(1);
+            }
+        }
     }
     rv = fclose(file);
     if(rv != 0) {

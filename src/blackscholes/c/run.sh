@@ -8,11 +8,13 @@ rm -f $LOGFILE
 
 for k in "${SETSIZE[@]}"
 do
-    echo "echo # Input with in_${k}M.txt >> ${LOGFILE}"
-    echo "echo $NUMITER >> ${LOGFILE}"
+    echo "# Input with in_${k}M.txt" >> ${LOGFILE}
+    echo $NUMITER >> ${LOGFILE}
+    ./blackscholes 1 data/in_${k}M.txt data/out_${k}M.txt > /dev/null 2>&1
     for i in $(seq 1 $NUMITER)
     do
-        echo "./blackscholes 1 in_${k}M.txt data/in_${k}M.txt data/out_${k}M.txt | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}"
+        echo iter $i
+        ./blackscholes 1 data/in_${k}M.txt data/out_${k}M.txt | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}
     done
 done
 

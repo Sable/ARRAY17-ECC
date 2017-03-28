@@ -8,11 +8,12 @@ rm -f $LOGFILE
 
 for k in "${SETSIZE[@]}"
 do
-    echo "echo # Input with temp_$k and power_$k >> ${LOGFILE}"
-    echo "echo $NUMITER >> ${LOGFILE}"
+    echo "# Input with temp_$k and power_$k" >> ${LOGFILE}
+    echo $NUMITER >> ${LOGFILE}
+    ./hotspot $k $k 20 1 data/temp_$k data/power_$k > /dev/null 2>&1
     for i in $(seq 1 $NUMITER)
     do
-        echo "./hotspot $k $k 20 1 data/temp_$k data/power_$k | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}"
+        ./hotspot $k $k 20 1 data/temp_$k data/power_$k | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}
     done
 done
 

@@ -135,22 +135,32 @@ L1:
     return p;
 }
 
+/*
+ * Get millisecond from timeval
+ */
 double getTime(struct timeval tv1, struct timeval tv2){
-    return ((double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +
-            (double) (tv2.tv_sec - tv1.tv_sec));
+    return ((double) (tv2.tv_usec - tv1.tv_usec) / 1000 +
+            (double) (tv2.tv_sec - tv1.tv_sec) * 1000);
 }
 
 int main(int argc, char**  argv){
-    if(argc != 2){
-        errorMessage("Usage: ./rprime n\n");
-    }
-    int n = atoi(argv[1]);
+    int n = 0;
+    bool isPrint = 0;
     struct timeval tv1, tv2;
+    if(argc == 2 || argc == 3){
+        n = atoi(argv[1]);
+        if(argc == 3){
+            isPrint = atoi(argv[2]) == 1;
+        }
+    }
+    else {
+        errorMessage("Usage: ./rprime n or ./rprime n 1\n");
+    }
     gettimeofday(&tv1, NULL);  // time_start
     vector* p = rprime(n);
     gettimeofday(&tv2, NULL);  // time_end
     printf("The elapsed time (ms): %lf\n", getTime(tv1,tv2));
-    printVector(p);
+    if(isPrint) printVector(p);
     return 0;
 }
 
