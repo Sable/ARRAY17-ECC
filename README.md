@@ -34,9 +34,9 @@ call it ECC.
 
 ## Configuration
 
-- ID : Lynx / Cheetah
-- OS : Ubuntu 16.10
-- GCC: 
+- ID : Cheetah
+- OS : Ubuntu 16.04.2 LTS
+- GCC: 5.4.0
 - ELI: v0.3a
 
 ## Benchmarks
