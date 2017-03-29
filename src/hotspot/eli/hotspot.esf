@@ -1,5 +1,4 @@
-
-@.z<-temp compute power;Cap;Rx;Ry;Rz;step;k;cnt;m1;m2;x;n1;n2;y;c1;c2;row;col;gw;gh
+@.z<-temp hotspot power;Cap;Rx;Ry;Rz;step;k;cnt;m1;m2;x;n1;n2;y;c1;c2;row;col;gw;gh
 t_chip <- 0.0005
 height <- width <- 0.016
 amb_temp <- 80.0
@@ -31,14 +30,14 @@ L1:z <- temp
 //[]<-' finish ',(+.k-1),' iterations'
 @.
 
-@.loop n;t0;t1;x
-t0 <- []AI 2
-x <- 0
-L0:->(n < x <- x + 1)/L1
-res <- temp compute power
+@.test_hotspot n;t0;t1;x
+start <- []AI 2
+i <- 0
+L0:->(n < i <- i + 1)/L1
+ res <- temp hotspot power
 ->L0
-L1:t1 <- []AI 2
-[] <- 'eclapsed time is ms ',+.(t1 - t0) % n * 1000
+L1: end <- []AI 2
+[] <- 'The eclapsed time is ms ',+.(end - start) % n * 1000
 @.
 
 []IO<-0
@@ -47,6 +46,7 @@ L1:t1 <- []AI 2
 //)fcopy h_512
 )fcopy h_1024
 //)fcopy h_2048
-//res <- temp compute power
+//res <- temp hotspot power
 
-loop 10
+test_hotspot 10
+

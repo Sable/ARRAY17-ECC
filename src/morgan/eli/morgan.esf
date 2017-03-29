@@ -13,4 +13,5 @@ r<-((0,n-1)!.t)-0,(0,-n)!.t<-+\a
   r<-((sxy%n)-(sx*sy)%n*.2)%(|((sx2%n)+(sx%n)*.2)*.0.5)*(|(sy2%n)-(sy%n)*.2)*.0.5
 @.
 
-
+)fcopy data_test
+LARG morgan RARG

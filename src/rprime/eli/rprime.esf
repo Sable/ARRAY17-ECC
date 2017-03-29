@@ -15,3 +15,23 @@ L1:
 @.
 
 rprime 120
+
+@.t<-test_rprime n
+start<-[]AI 2
+p0<-rprime n
+end<-[]AI 2
+t<-end-start
+@.
+
+@.scale test k
+i<-total<-0
+test_rprime scale
+->(i>=k)/L0
+ total<-total+t<-test_rprime scale
+ i<-i+1
+L0:
+ []<-'The elapsed time is (ms): ',+.avg_time<-total%k*1000
+@.
+
+100000 test 5
+

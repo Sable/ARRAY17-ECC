@@ -54,7 +54,7 @@ BlackSchole is a mathematical model of a financial market containing certain der
 Source: [Princeton PARSEC](http://parsec.cs.princeton.edu/download.htm)
 
 - [x] C
-- [ ] ELI
+- [x] ELI
 - [ ] ECC
 
 ### K-means
@@ -64,7 +64,7 @@ k-means clustering is a method of vector quantization originally from signal pro
 Source: [Rodinia 2.3](http://lava.cs.virginia.edu/Rodinia/)
 
 - [x] C
-- [ ] ELI
+- [x] ELI
 - [ ] ECC
 
 ### Hotspot
@@ -74,13 +74,13 @@ HotSpot is a widely used tool to estimate processor temperature based on an arch
 Source: [Rodinia 2.3](http://lava.cs.virginia.edu/Rodinia/)
 
 - [x] C
-- [ ] ELI
+- [x] ELI
 - [ ] ECC
 
 ### Morgan
 
 - [ ] C
-- [ ] ELI
+- [x] ELI
 - [ ] ECC
 
 ### RPrime
@@ -94,3 +94,4 @@ Scale: 100000 200000 400000 800000
 ## Feedback
 
 Please contact [Hanfeng](mailto:hanfeng.chen@mail.mcgill.ca).
+
