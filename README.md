@@ -55,7 +55,7 @@ Source: [Princeton PARSEC](http://parsec.cs.princeton.edu/download.htm)
 
 - [x] C
 - [x] ELI
-- [ ] ECC
+- [x] ECC
 
 ### K-means
 
@@ -65,7 +65,7 @@ Source: [Rodinia 2.3](http://lava.cs.virginia.edu/Rodinia/)
 
 - [x] C
 - [x] ELI
-- [ ] ECC
+- [x] ECC
 
 ### Hotspot
 
@@ -75,13 +75,13 @@ Source: [Rodinia 2.3](http://lava.cs.virginia.edu/Rodinia/)
 
 - [x] C
 - [x] ELI
-- [ ] ECC
+- [x] ECC
 
 ### Morgan
 
-- [ ] C
+- [x] C
 - [x] ELI
-- [ ] ECC
+- [x] ECC
 
 ### RPrime
 
@@ -89,7 +89,7 @@ Scale: 100000 200000 400000 800000
 
 - [x] C
 - [x] ELI
-- [ ] ECC
+- [x] ECC
 
 ## Feedback
 

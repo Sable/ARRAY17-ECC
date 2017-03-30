@@ -1,4 +1,6 @@
 /*
+    irintArray(r);
+    printf("--- t ---\n");
  * This program comes from morgran.esf
  */
 
@@ -45,6 +47,20 @@ void tryFreeArray(array *t){
         tryFree(t->value);
         tryFree(t);
     }
+}
+
+void printArray(array *r){
+    int i,j, dim0, dim1;
+    dim0 = r->dim0;
+    dim1 = r->dim1;
+    for(i=0; i<dim0; i++){
+        for(j=0; j<dim1; j++){
+            if(j!=0) printf(" ");
+            printf("%g", r->value[i*dim1+j]);
+        }
+        printf("\n");
+    }
+    printf("[dim = (%d, %d)]\n", dim0, dim1);
 }
 
 array* scan(array* a){
@@ -105,7 +121,7 @@ array* concat(array *a){
     for(i=0; i<dim0; i++){
         t->value[count++] = 0;
         for(j=0; j<dim1; j++){
-            t->value[count++] = a->value[i*dim1+dim0];
+            t->value[count++] = a->value[i*dim1+j];
         }
     }
     return t;
@@ -148,14 +164,16 @@ array* plus(array *a, array *b){
 }
 
 array* msum(int n, array *a){
-    array *t,*t0,*t1,*r; 
+    array *t,*t0,*t1,*t2,*r; 
     t  = scan(a);
-    t0 = concat(drop(-n,t));
-    t1 = drop(n-1,t);
-    r  = minus(t0,t1);
+    t0 = drop(-n,t);
+    t1 = concat(t0);
+    t2 = drop(n-1,t);
+    r  = minus(t2,t1);
     tryFreeArray(t);
     tryFreeArray(t0);
     tryFreeArray(t1);
+    tryFreeArray(t2);
     return r;
 }
 
@@ -275,37 +293,23 @@ array* morgan(int n, array *x, array *y){
 array* loadArray(){
     int i,j,dim0, dim1;
     array *t;
-    initArray(t, dim0, dim1);
     scanf("%d %d",&dim0,&dim1);
+    initArray(t, dim0, dim1);
     for(i=0; i<dim0; i++){
         for(j=0; j<dim1; j++)
-            scanf("%d", &(t->value[i*dim1+j]));
+            scanf("%lf", &(t->value[i*dim1+j]));
     }
     return t;
 }
 
-void printArray(array *r){
-    int i,j, dim0, dim1;
-    dim0 = r->dim0;
-    dim1 = r->dim1;
-    for(i=0; i<dim0; i++){
-        for(j=0; j<dim1; j++){
-            if(j!=0) printf(" ");
-            printf("%lf", r->value[i*dim1+j]);
-        }
-        printf("\n");
-    }
-    printf("[dim = (%d, %d)]\n", dim0, dim1);
-}
-
 double getTime(struct timeval tv1, struct timeval tv2){
-    return ((double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +
-            (double) (tv2.tv_sec - tv1.tv_sec));
+    return ((double) (tv2.tv_usec - tv1.tv_usec) / 1000 +
+            (double) (tv2.tv_sec - tv1.tv_sec) * 1000);
 }
 
 int main(int argc, char**  argv){
     if(argc != 1){
-        errorMessage("Usage: ./rprime < file.txt \n");
+        errorMessage("Usage: ./morgan < file.txt \n");
     }
     int n; 
     array *x, *y;
@@ -317,7 +321,7 @@ int main(int argc, char**  argv){
     array* r = morgan(n, x, y);
     gettimeofday(&tv2, NULL);  // time_end
     printf("The elapsed time (ms): %lf\n", getTime(tv1,tv2));
-    printArray(r);
+    //printArray(r);
     tryFreeArray(x);
     tryFreeArray(y);
     tryFreeArray(r);

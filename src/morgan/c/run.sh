@@ -1,18 +1,21 @@
 #!/bin/bash
 
-SETSIZE=( 1 2 4 8 )
+SETSIZE=( 128 256 512 1024 )
 NUMITER=5
 LOGFILE=result_morgan.log
 
 rm -f $LOGFILE
 
+make
+
 for k in "${SETSIZE[@]}"
 do
-    echo "echo # Input with morgan${k} >> ${LOGFILE}"
-    echo "echo $NUMITER >> ${LOGFILE}"
+    echo "# Input with in_${k}K" >> ${LOGFILE}
+    echo $NUMITER >> ${LOGFILE}
+    ./morgan < in_${k}K.txt > /dev/null 2>&1
     for i in $(seq 1 $NUMITER)
     do
-        echo "./morgan < morgan${k} | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}"
+        ./morgan < in_${k}K.txt | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}
     done
 done
 

@@ -1,7 +1,7 @@
 CC=gcc
 CFLAG=-std=c99 -lm
 
-all:
+all: morgan.c
 	$(CC) morgan.c -o morgan $(CFLAG)
 
 clean:
