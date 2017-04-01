@@ -34,10 +34,19 @@ call it ECC.
 
 ## Configuration
 
+System information
+
 - ID : Cheetah
 - OS : Ubuntu 16.04.2 LTS
 - GCC: 5.4.0
 - ELI: v0.3a
+
+
+Benchmark versions:
+
+- [x] C
+- [x] ELI
+- [x] ECC
 
 ## Benchmarks
 
@@ -53,9 +62,6 @@ BlackSchole is a mathematical model of a financial market containing certain der
 
 Source: [Princeton PARSEC](http://parsec.cs.princeton.edu/download.htm)
 
-- [x] C
-- [x] ELI
-- [x] ECC
 
 ### K-means
 
@@ -63,9 +69,6 @@ k-means clustering is a method of vector quantization originally from signal pro
 
 Source: [Rodinia 2.3](http://lava.cs.virginia.edu/Rodinia/)
 
-- [x] C
-- [x] ELI
-- [x] ECC
 
 ### Hotspot
 
@@ -73,23 +76,15 @@ HotSpot is a widely used tool to estimate processor temperature based on an arch
 
 Source: [Rodinia 2.3](http://lava.cs.virginia.edu/Rodinia/)
 
-- [x] C
-- [x] ELI
-- [x] ECC
 
 ### Morgan
 
-- [x] C
-- [x] ELI
-- [x] ECC
 
 ### RPrime
 
-Scale: 100000 200000 400000 800000
+Input scale:
 
-- [x] C
-- [x] ELI
-- [x] ECC
+    100000 200000 400000 800000
 
 ## Feedback
 
