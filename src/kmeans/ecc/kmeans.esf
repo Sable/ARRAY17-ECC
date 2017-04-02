@@ -1,0 +1,26 @@
+// source: D:\eli\example1\kmeans.esf & karg.esf
+
+// kmeans for compile
+@.clusters<-k kmeans feature;np;nc;t0;t1;t2;df;dist;index;mb;preclust;preclen;curp;loop;delta
+mb <- index <- (np <- 1 ^. df <- #feature) # loop <- _1  // 1
+clusters <- (nc <- k, df[2]) ^. feature     //2
+L0:preclust <- nc # curp <- 0               //3
+preclen <- k # 0                            //4
+L1:->(np < curp <- curp + 1)/L2             //5
+index[curp] <- t0 <- dist ! _./ dist <- +/ ((nc # feature[curp;]) - clusters) *. 2  //6
+preclust[t0;] <- preclust[t0;] + feature[curp;] //7
+preclen[t0]  <- preclen[t0]  + 1            //8
+->L1
+L2: delta <- +/ mb ~= index
+clusters[t2;] <- preclust[t2;] % &. (df[2],#t2) # preclen[t2 <- t1 / ! #t1 <- preclen ~= 0]
+mb <- index
+->((delta > 0.001)^(500 > loop<-loop+1))/L0
+@.
+
+&LPARM C 1 9
+'kmeans IE'
+&
+
+&RPARM I 1 5
+1 0 2 _1 _1
+&
