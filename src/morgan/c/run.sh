@@ -12,10 +12,10 @@ for k in "${SETSIZE[@]}"
 do
     echo "# Input with in_${k}K" >> ${LOGFILE}
     echo $NUMITER >> ${LOGFILE}
-    ./morgan < in_${k}K.txt > /dev/null 2>&1
+    ./morgan < data/in_${k}K.txt > /dev/null 2>&1
     for i in $(seq 1 $NUMITER)
     do
-        ./morgan < in_${k}K.txt | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}
+        ./morgan < data/in_${k}K.txt | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}
     done
 done
 
