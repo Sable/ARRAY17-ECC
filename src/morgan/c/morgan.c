@@ -129,7 +129,7 @@ array* concat(array *a){
 
 array* minus(array *a, array *b){
     if(a->dim0 != b->dim0 || a->dim1 != b->dim1){
-        errorMessage("Two arrays have different shape in minus");
+        errorMessage("Two arrays have different shape in minus\n");
     }
     array *t;
     int i,j,dim0, dim1;
@@ -147,7 +147,7 @@ array* minus(array *a, array *b){
 
 array* plus(array *a, array *b){
     if(a->dim0 != b->dim0 || a->dim1 != b->dim1){
-        errorMessage("Two arrays have different shape in plus");
+        errorMessage("Two arrays have different shape in plus\n");
     }
     array *t;
     int i,j,dim0, dim1;
@@ -193,7 +193,7 @@ array* power(array *a, double c){
 
 array* multiply(array *a, array *b){
     if(a->dim0 != b->dim0 || a->dim1 != b->dim1){
-        errorMessage("Two arrays have different shape in multiplication");
+        errorMessage("Two arrays have different shape in multiplication\n");
     }
     int i,j,dim0,dim1;
     array *t;
@@ -321,7 +321,7 @@ int main(int argc, char**  argv){
     array* r = morgan(n, x, y);
     gettimeofday(&tv2, NULL);  // time_end
     printf("The elapsed time (ms): %lf\n", getTime(tv1,tv2));
-    //printArray(r);
+    printArray(r);
     tryFreeArray(x);
     tryFreeArray(y);
     tryFreeArray(r);

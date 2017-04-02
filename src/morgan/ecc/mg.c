@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+//#include "aplc.h"
 #include "eli3lib.h"
 #include "elimacros.h"
 #define HEAPSIZE 2097152000
@@ -48,7 +49,6 @@
    STOFM3 v47;
    STOFM2 v48;
    STOFM3 v49;
-   STOFM3 v30; // HF
    STOFM3 v31;
 main(int argc, char * argv[])
  {char * lparm, * rparm;
@@ -111,7 +111,7 @@ if(w0<11) for(v1=0;v1<w0;v1++){a_prtD0(*p2);++p2;}
     {a_prtD0(*p2); ++p2; if ((v1%10)==9) printf("\n");}
   putchar('\n');}
  putchar('\n');*/
-   free(heap); free(v5); free(v6);                  exit(0);}
+   free(heap); free(v5); free(v6); exit(0);}
 /*              CODE SEGMENT FOR FUNCTION morgan        */
 morgan   (v19,p20)
     int  v19;
@@ -141,7 +141,6 @@ morgan   (v19,p20)
    v18.maxl = -1;
    v44.maxl= -1; v45.maxl= -1; v46.maxl= -1;
    v47.maxl= -1; v48.maxl= -1; v49.maxl= -1;
-   v30.maxl = -1; //HF
    v31.maxl = -1;
    v21.maxl = -1;
    v22.maxl = -1;
@@ -184,13 +183,13 @@ lo2 = (double *) v20.valp;
   cad[2]= v20.dims[1]     ;
   cad[3]= v20.dims[2]     ;
   n=0;
-  n += dl[0]*1               ;
+  n += dl[0]*(1-1)           ;
   tdl[0] =v20.dims[2]     ;
   r0= tdl[0]*v20.dims[1]     ;
 INCHEAPPH(v21,inchp2, p2 = ( double *) cad0 ); /* by INCHEAPP */
 if (r0==0) goto l2;
   for (u0=0; u0<v20.dims[1]     ; u0++)
- {w0 = dl[0]*u0;
+ {w0 = dl[1]*u0;
   q0 = tdl[0]*u0;
   for (u1=0; u1<v20.dims[2]     ; u1++)
    p2[q0+u1] = lo2[n+w0+dl[2]*u1];}
@@ -208,13 +207,13 @@ lo2 = (double *) v20.valp;
   cad[2]= v20.dims[1]     ;
   cad[3]= v20.dims[2]     ;
   n=0;
-  n += dl[0]*2               ;
+  n += dl[0]*(2-1)           ;
   tdl[0] =v20.dims[2]     ;
   r0= tdl[0]*v20.dims[1]     ;
 INCHEAPPH(v22,inchp2, p2 = ( double *) cad0 ); /* by INCHEAPP */
 if (r0==0) goto l3;
   for (u0=0; u0<v20.dims[1]     ; u0++)
- {w0 = dl[0]*u0;
+ {w0 = dl[1]*u0;
   q0 = tdl[0]*u0;
   for (u1=0; u1<v20.dims[2]     ; u1++)
    p2[q0+u1] = lo2[n+w0+dl[2]*u1];}
@@ -225,13 +224,9 @@ l3:;
   v22.reall= cad[1];
 /******************   LINE 3   ******************/
   for (v1=0; v1<2; v1++)
-  v30.dims[v1+0]=  v21.dims[v1+0];
-   r0=v21.reall;
-INCHEAPP3(v30,inchp2); /* by INCHEAPP */
-   memcpy(v30.valp, v21.valp, v21.reall<<3);
-p2 = (double *) v23.valp;
+rshp[1+v1]=  v21.dims[v1+0];
+rshp[0]=v21.reall;
 ro2 = (double *) v21.valp;
-//msum     (v-1,ro2);
 msum     (v19,ro2);
   for (v1=0; v1<2; v1++)
   v23.dims[v1+0]=  cad[v1+2];
@@ -240,13 +235,9 @@ INCHEAPP3(v23,inchp2); /* by INCHEAPP */
    memcpy(v23.valp, (char *) fretfp, cad[1]<<3);
 /******************   LINE 4   ******************/
   for (v1=0; v1<2; v1++)
-  v30.dims[v1+0]=  v22.dims[v1+0];
-   r0=v22.reall;
-INCHEAPP3(v30,inchp2); /* by INCHEAPP */
-   memcpy(v30.valp, v22.valp, v22.reall<<3);
-p2 = (double *) v25.valp;
+rshp[1+v1]=  v22.dims[v1+0];
+rshp[0]=v22.reall;
 ro2 = (double *) v22.valp;
-//msum     (v-1,ro2);
 msum     (v19,ro2);
   for (v1=0; v1<2; v1++)
   v25.dims[v1+0]=  cad[v1+2];
@@ -263,14 +254,9 @@ lo2 = (double *) v21.valp;
   for (v1 =0; v1<r0; v1++) /* code for *. */
      p2[v1] = lo2[v1]*lo2[v1];
   for (v1=0; v1<2; v1++)
-  v30.dims[v1+0]=  v34.dims[v1+0];
-   r0=v34.reall;
-INCHEAPP3(v30,inchp2); /* by INCHEAPP */
-   memcpy(v30.valp, v34.valp, v34.reall<<3);
-p2 = (double *) v24.valp;
-//lo1 = (  int  *) v21.valp;
+rshp[1+v1]=  v34.dims[v1+0];
+rshp[0]=v34.reall;
 ro2 = (double *) v34.valp;
-//msum     (lo1,ro2);
 msum     (v19,ro2);
   for (v1=0; v1<2; v1++)
   v24.dims[v1+0]=  cad[v1+2];
@@ -287,14 +273,9 @@ lo2 = (double *) v22.valp;
   for (v1 =0; v1<r0; v1++) /* code for *. */
      p2[v1] = lo2[v1]*lo2[v1];
   for (v1=0; v1<2; v1++)
-  v30.dims[v1+0]=  v35.dims[v1+0];
-   r0=v35.reall;
-INCHEAPP3(v30,inchp2); /* by INCHEAPP */
-   memcpy(v30.valp, v35.valp, v35.reall<<3);
-p2 = (double *) v26.valp;
-//lo1 = (  int  *) v22.valp;
+rshp[1+v1]=  v35.dims[v1+0];
+rshp[0]=v35.reall;
 ro2 = (double *) v35.valp;
-//msum     (lo1,ro2);
 msum     (v19,ro2);
   for (v1=0; v1<2; v1++)
   v26.dims[v1+0]=  cad[v1+2];
@@ -319,14 +300,10 @@ ro2 = (double *) v22.valp;
   for (v1 =0; v1<r0; v1++) /* code for * */
      p2[v1] = lo2[v1]*ro2[v1];
   for (v1=0; v1<2; v1++)
-  v30.dims[v1+0]=  v36.dims[v1+0];
-   r0=v36.reall;
-INCHEAPP3(v30,inchp2); /* by INCHEAPP */
-   memcpy(v30.valp, v36.valp, v36.reall<<3);
-p2 = (double *) v27.valp;
-lo1 = (  int  *) v21.valp;
+rshp[1+v1]=  v36.dims[v1+0];
+rshp[0]=v36.reall;
 ro2 = (double *) v36.valp;
-msum     (lo1,ro2);
+msum     (v19,ro2);
   for (v1=0; v1<2; v1++)
   v27.dims[v1+0]=  cad[v1+2];
    r0=cad[1];
@@ -369,7 +346,8 @@ if (cad[33] != v39.dims[1])
 ro2 = (double *) v39.valp;
   for (v1 =0; v1<cad[31]; v1++) /* code for - */
     v6[v1] = v6[v1]-ro2[v1];
-  r0=-1;
+  r0 =   cad[31];
+  cad[31] =  r0;
   for (v1 =0; v1<cad[31]; v1++) /* code for | */
     v6[v1] =  fabs(v6[v1]);
   for (v1=0; v1<2; v1++)
@@ -380,7 +358,7 @@ ro2 = (double *) v39.valp;
 INCHEAPP3(v37,inchp2); /* by INCHEAPP */
 p2 = (double *) v37.valp;
   for (v1 =0; v1<r0; v1++) /* code for *. */
-     p2[v1] = sqrt((double)v6[v1]);
+     p2[v1] = pow(v6[v1],0.5);
   r0=v23.reall;
   cad[31]=r0;
   for (v1=0; v1<2; v1++)
@@ -418,8 +396,9 @@ ro2 = (double *) v40.valp;
   for (v1 =0; v1<cad[31]; v1++) /* code for + */
     v6[v1] = v6[v1]+ro2[v1];
   for (v1 =0; v1<cad[31]; v1++) /* code for *. */
-    v6[v1] = sqrt((double)v6[v1]);
-  r0=-1;
+    v6[v1] = pow(v6[v1],0.5);
+  r0 =   cad[31];
+  cad[31] =  r0;
   for (v1 =0; v1<cad[31]; v1++) /* code for | */
     v6[v1] =  fabs(v6[v1]);
 r0= cad[31];
@@ -532,13 +511,13 @@ lj1:
 /*   GENSCAN generates the following code */
 p2 = (double *) v31.valp;
 ro2 = (double *) v30.valp;
-v31.dims[0]=-2;
-v31.dims[1]= nan;
-  r0=-1;
+  for (v1=0; v1<2; v1++)
+  v31.dims[v1+0]=  v30.dims[v1+0];
+  r0 =   v30.reall;
 INCHEAPP3(v31,inchp2); /* by INCHEAPP */
 p2 = (double *) v31.valp;
 if (r0==0) goto l4;
-r0=v30.dims[0]     ;
+r0=v30.dims[1]     ;
 r1=v30.dims[0]     ;
   for (u0=0; u0<r1; u0++)
   {v1= r0*u0;
