@@ -1,0 +1,39 @@
+
+@.z<-temp hotspot power;Cap;Rx;Ry;Rz;step;k;cnt;m1;m2;x;n1;n2;y;c1;c2;row;col;gw;gh
+t_chip <- 0.0005
+height <- width <- 0.016
+amb_temp <- 80.0
+FACTOR_CHIP<-0.5
+K_SI<- 100
+SPEC_HEAT_SI <- 1750000
+PRECISION <- 0.001
+MAX_PD <- 3000000
+cnt <- 2 // number of iteration
+Cap <- FACTOR_CHIP * SPEC_HEAT_SI * t_chip * (gw <- width % col <- _1^.#temp) * gh <- height % row <- 1^.#temp
+Rx <- gw % (2.0 * K_SI * t_chip * gh)
+Ry <- gh % (2.0 * K_SI * t_chip * gw)
+Rz <- t_chip % (K_SI * gh * gw)
+step <- PRECISION % MAX_PD % (FACTOR_CHIP * t_chip * SPEC_HEAT_SI)
+k <- 0
+c1 <- c2 <- (row,col)#2
+c1[;0,col-1] <- 1
+c2[0,row-1;] <- 1
+L0:->(cnt < k <- k + 1)/L1
+m1 <- (0 1!.temp),0
+m2 <- 0,0 _1!.temp
+x <- (m1 + m2) - c1 * temp
+n1 <- (1 0!.temp),[0]0
+n2 <- 0,[0](_1 0)!.temp
+y <- (n1 + n2) - c2 * temp
+temp <- temp + (step % Cap) * (power + (x % Rx) + (y % Ry) + (amb_temp - temp) % Rz)
+->L0
+L1:z <- temp
+@.
+
+&LPARM C 1 10
+'hotspot EE'
+&
+
+&RPARM I 1 7
+0 2 _1 _1 2 _1 _1
+&
