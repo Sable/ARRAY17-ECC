@@ -1,15 +1,20 @@
 #!/bin/bash
 # 32 / 64 / 128 / 256
 if [ "$#" -ne 1 ]; then
-    id=32
+    n=0
 else
-    id=$1
+    n=$1
 fi
 
+arg_list=( 32 64 128 256 )
+id=${arg_list[$n]}
+
 arg=data/kmeans${id}K
-log=kmeans${id}K.log
+log=kmeans${n}.log
 
 rm -f ${log}
+echo "#Input with ${arg}" > ${log}
+echo "5" >> ${log}
 
 echo "Executing $arg 5 times"
 
@@ -17,7 +22,7 @@ echo "Executing $arg 5 times"
 ./km ${arg} &> /dev/null
 for i in {1..5}
 do
-    ./km ${arg} >> ${log}
+    ./km ${arg} | grep "elapsed time" | awk -F\: '{print $2}' >> ${log}
 done
 
 echo ".. Saved to ${log}"

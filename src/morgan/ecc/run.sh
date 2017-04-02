@@ -1,15 +1,20 @@
 #!/bin/bash
 # 256 / 512 / 1024 / 2048
 if [ "$#" -ne 1 ]; then
-    id=256
+    n=0
 else
-    id=$1
+    n=$1
 fi
 
+arg_list=( 256 512 1024 2048 )
+id=${arg_list[${n}]}
+
 arg=data/in_${id}K
-log=morgan${id}.log
+log=morgan${n}.log
 
 rm -f ${log}
+echo "#Input with ${arg}" > ${log}
+echo "5" >> ${log}
 
 echo "Executing $arg 5 times"
 
@@ -17,7 +22,7 @@ echo "Executing $arg 5 times"
 ./mg ${arg} &> /dev/null
 for i in {1..5}
 do
-    ./mg ${arg} >> ${log}
+    ./mg ${arg} | grep "elapsed time" | awk -F\: '{print $2}' >> ${log}
 done
 
 echo ".. Saved to ${log}"
