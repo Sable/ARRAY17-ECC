@@ -1,4 +1,5 @@
 PREFIX=${PARSECDIR}/pkgs/apps/blackscholes/inst/${PARSECPLAT}
+CXX=gcc
 
 CSRC    = $(SRC)
 TARGET  = blackscholes
@@ -59,7 +60,7 @@ CXXFLAGS += $(MT) $(NCO) $(FUNC) $(ERR) $(CSRC)
 all: $(TARGET)
 
 $(TARGET): clean $(CSRC)
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(LIBS) -o $(TARGET) -O3
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(LIBS) -o $(TARGET) -O3 -lm
 
 $(M4_SRC): $(SRC)
 	$(M4) $(M4_BASE)/$(MACROS) $< > $@

@@ -1,6 +1,6 @@
 # C compiler
 CC = gcc
-CC_FLAGS = -g -fopenmp -O2 
+CC_FLAGS = -fopenmp -O3
 
 kmeans: clean cluster.o getopt.o kmeans.o kmeans_clustering.o clean
 	$(CC) $(CC_FLAGS) cluster.o getopt.o kmeans.o kmeans_clustering.o  -o kmeans

@@ -324,7 +324,8 @@ int main (int argc, char **argv)
     int rv;
 	char *inputFile;
     char *outputFile;
-    clock_t ft; //LPVOID tid=0;
+    //clock_t ft; //LPVOID tid=0;
+    double start_time, end_time;
 
 #ifdef PARSEC_VERSION
 #define __PARSEC_STRING(x) #x
@@ -419,7 +420,7 @@ int main (int argc, char **argv)
     }
 
     printf("Size of data: %d\n", numOptions * (sizeof(OptionData) + sizeof(int)));
-    ft = clock();
+    start_time = clock();
 #ifdef ENABLE_PARSEC_HOOKS
     __parsec_roi_begin();
 #endif
@@ -473,9 +474,12 @@ int main (int argc, char **argv)
 #ifdef ENABLE_PARSEC_HOOKS
     __parsec_roi_end();
 #endif
-    printf("%d\n",CLOCKS_PER_SEC);
-    printf("The elapsed time (ms): %lf\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/NUM_RUNS*1000);
+    //printf("%d\n",CLOCKS_PER_SEC);
+    end_time = clock();
+    //printf("The elapsed time (ms): %lf\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/NUM_RUNS*1000);
+    printf("The elapsed time (ms): %lf\n",(end_time-start_time)/CLOCKS_PER_SEC/NUM_RUNS*1000);
     //Write prices to output file
+    /*
     file = fopen(outputFile, "w");
     if(file == NULL) {
       printf("ERROR: Unable to open file `%s'.\n", outputFile);
@@ -502,6 +506,7 @@ int main (int argc, char **argv)
       printf("ERROR: Unable to close file `%s'.\n", outputFile);
       exit(1);
     }
+    */
 
 #ifdef ERR_CHK
     printf("Num Errors: %d\n", numError);

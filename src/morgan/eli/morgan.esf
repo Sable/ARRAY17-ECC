@@ -13,5 +13,33 @@ r<-((0,n-1)!.t)-0,(0,-n)!.t<-+\a
   r<-((sxy%n)-(sx*sy)%n*.2)%(|((sx2%n)+(sx%n)*.2)*.0.5)*(|(sy2%n)-(sy%n)*.2)*.0.5
 @.
 
-)fcopy data_test
-LARG morgan RARG
+@.t<-test_morgan
+start<-[]AI 2
+r0<-LARG morgan RARG
+end<-[]AI 2
+t<-end-start
+@.
+
+@.scale test k;i;total;t0;avg_time
+i<-total<-0
+t0<-test_morgan
+L1:->(i>=k)/L0
+ total<-total+t<-test_morgan
+ []<-t%1000
+ i<-i+1
+ ->L1
+L0:
+ []<-'The elapsed time is (ms): ',+.avg_time<-total%k*1000
+@.
+
+)fcopy in_128K
+128 test 5
+
+)fcopy in_256K
+256 test 5
+
+)fcopy in_512K
+512 test 5
+
+)fcopy in_1024K
+1024 test 5

@@ -22,13 +22,10 @@ LE:
 //[] <- 'member: ',+.mb-1
 @.
 
-@.test_kmeans
+@.test_kmeans;start;end
 start<-[]AI 2
 3 kmeans data
 end<-[]AI 2
-[]<-'The elapsed time is (ms): ',+.(end-start)%1000
+[]<-'The elapsed time is (ms): ',+.avg_time<-(end-start)%1000
 @.
-
-)fcopy d_256K
-test_kmeans
 

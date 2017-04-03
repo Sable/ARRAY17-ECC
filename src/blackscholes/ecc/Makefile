@@ -1,6 +1,6 @@
 cc=gcc
 ecc=ecc
-CFLAGS=-O3
+CFLAGS=-O3 -lm
 hh=../../../eccws/include/
 bb=../../../eccws/libs
 

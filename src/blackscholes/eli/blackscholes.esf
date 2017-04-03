@@ -45,15 +45,8 @@ LN1: t<-(end<-[]AI 2)-start
 //[]<-OptionPrice
 @.
 
-//)fcopy in_2M
-//)fcopy 'C:\Users\wai-mee\Desktop\summer13\week2\data\in_10M.esf'
-//BlkSchlsEqEuroNoDiv (sptprice;strike;rate;volatility;otime;otype;0)
-//BlkSchlsEqEuroNoDiv (d_s;d_strike;d_r;d_v;d_t;d_OptionType=='P';0)
-
-[]IO<-0
-inv_sqrt_2xPI <- 0.39894228040143270286
-)fcopy in_1M
-
+@.scale test k;i;t;total;avg_time;sptprice;strike;rate;volatility;time;otype;timet
+// loading data
 sptprice   <- d_s 
 strike     <- d_strike
 rate       <- d_r
@@ -61,15 +54,30 @@ volatility <- d_v
 time       <- d_t
 otype      <- d_OptionType='P'
 timet      <- 0
-
-@.scale test k
+// start
 i<-total<-0
 t<-test_bs scale
-->(i>=k)/L0
+L1:->(i>=k)/L0
  total<-total+t<-test_bs scale
+ []<-t%1000
  i<-i+1
+ ->L1
 L0:
  []<-'The elapsed time is (ms): ',+.avg_time<-total%k*1000
 @.
 
+[]IO<-0
+inv_sqrt_2xPI <- 0.39894228040143270286
+
+)fcopy in_1M
 10 test 5
+
+)fcopy in_2M
+10 test 5
+
+)fcopy in_4M
+10 test 5
+
+)fcopy in_8M
+10 test 5
+

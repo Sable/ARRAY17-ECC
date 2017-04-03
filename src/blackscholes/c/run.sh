@@ -13,7 +13,6 @@ do
     ./blackscholes 1 data/in_${k}M.txt data/out_${k}M.txt > /dev/null 2>&1
     for i in $(seq 1 $NUMITER)
     do
-        echo iter $i
         ./blackscholes 1 data/in_${k}M.txt data/out_${k}M.txt | grep "elapsed time" | awk -F\: '{print $2}' >> ${LOGFILE}
     done
 done

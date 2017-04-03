@@ -1,14 +1,16 @@
 #!/bin/bash
 
-#benchDirs=( blackscholes hotspot kmeans morgan rprime )
-benchDirs=( rprime )
+benchDirs=( blackscholes hotspot kmeans morgan rprime )
+#benchDirs=( blackscholes )
+
+start_time=`date +%s`
 
 echo === List of benchmarks ===
 
 count=0
 for each in "${benchDirs[@]}"
 do
-    echo ${count}. $each
+    echo "${count}) $each"
     ((count++))
 done
 
@@ -20,7 +22,7 @@ count=0
 for each in "${benchDirs[@]}"
 do
     echo ${count}. "../../src/$each/c/" | tr -d '\n'
-    make -C "../../src/$each/c/" > /dev/null 2>&1
+    make -C "../../src/$each/c/" &> /dev/null
     STATUS=${PIPESTATUS[0]}
     if [ $STATUS -eq 0 ]
     then
@@ -54,4 +56,6 @@ do
     ((count++))
 done
 
+end_time=`date +%s`
 
+echo execution time was `expr $end_time - $start_time` s.

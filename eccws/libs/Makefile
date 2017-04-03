@@ -9,7 +9,7 @@ $(libName): eli3lib.o
 	ar rcs $(libName) eli3lib.o 
 
 eli3lib.o: eli3lib.c
-	$(cc) -c eli3lib.c -I$(hh)	
+	$(cc) -c eli3lib.c -I$(hh)
 
 clean:
 	rm -f *.o $(libName)

@@ -7,7 +7,7 @@ bb=../../../eccws/libs
 all: hs
 
 hs: hs.c
-	$(cc) hs.c -o hs $(CFLAGS) -I$(hh) -L$(bb) -leli3lib 
+	$(cc) hs.c -o hs $(CFLAGS) -I$(hh) -L$(bb) -leli3lib -lm
 
 genC: hotspot.esf
 	$(ecc) hotspot.esf

@@ -6,7 +6,8 @@
 #include "eli3lib.h"
 #include "elimacros.h"
 #define HEAPSIZE 2097152000
-#define BVBFLE32 102400000
+//#define BVBFLE32 102400000
+#define BVBFLE32 153600000
 #define IVBFLE 163840
 #define EVBFLE 163840
 #define CVBFLE 163840
@@ -59,7 +60,8 @@ main(int argc, char * argv[])
   extern int apl_sec();
   initf= 1;
   heap=(char*)amalloc(HEAPSIZE);
-  v5=(int*)amalloc(131072000); v6=(double*)amalloc(131072000);
+  //v5=(int*)amalloc(131072000); v6=(double*)amalloc(131072000);
+  v5=(int*)amalloc(196608000); v6=(double*)amalloc(196608000);
  {while (--argc > 0)
   if (argc>0) {lparm = *argv; *argv = *argv + 1;}
   else rparm = *argv;}
@@ -620,8 +622,9 @@ r0= cad[31];
 if (cad[32] != v43.dims[0])
   LEMSG(40,1);
   v28.dims[1]=cad[33];
-if (cad[33] != v43.dims[1])
-  LEMSG(40,1);
+//printf("%d %d\n",cad[33],v43.dims[1]);
+/*if (cad[33] != v43.dims[1])
+  LEMSG(40,1);*/
   for (v1=0; v1<2; v1++)
   v28.dims[v1+0]=  cad[32+v1];
 INCHEAPP3(v28,inchp2); /* by INCHEAPP */

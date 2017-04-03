@@ -30,23 +30,38 @@ L1:z <- temp
 //[]<-' finish ',(+.k-1),' iterations'
 @.
 
-@.test_hotspot n;t0;t1;x
+@.t<-test_hotspot n;t0;t1;x;i;start;end;res
 start <- []AI 2
 i <- 0
 L0:->(n < i <- i + 1)/L1
  res <- temp hotspot power
 ->L0
 L1: end <- []AI 2
-[] <- 'The eclapsed time is ms ',+.(end - start) % n * 1000
+t <- end - start
+@.
+
+@.scale test k;t0;i;total;t0;avg_time
+i<-total<-0
+t0<-test_hotspot 10
+L1:->(i>=k)/L0
+ total<-total+t<-test_hotspot 10
+ []<-t%1000
+ i<-i+1
+ ->L1
+L0:
+ []<-'The elapsed time is (ms): ',+.avg_time<-total%k*1000
 @.
 
 []IO<-0
-//)fcopy 'C:\Users\wai-mee\Desktop\del\201309\hotspot-data\h_64.esf'
-//)fcopy h_256
-//)fcopy h_512
+
+)fcopy h_256
+256 test 5
+
+)fcopy h_512
+512 test 5
+
 )fcopy h_1024
-//)fcopy h_2048
-//res <- temp hotspot power
+1024 test 5
 
-test_hotspot 10
-
+)fcopy h_2048
+2048 test 5

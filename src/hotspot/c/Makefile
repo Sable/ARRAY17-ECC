@@ -1,8 +1,8 @@
-CC = g++
-CC_FLAGS = -fopenmp -O2
+CC = gcc
+CC_FLAGS = -O3 -lm
 
 hotspot: clean
-	$(CC) $(CC_FLAGS) hotspot.cpp -o hotspot 
+	$(CC) $(CC_FLAGS) hotspot.c -o hotspot 
 
 clean:
 	rm -f hotspot
