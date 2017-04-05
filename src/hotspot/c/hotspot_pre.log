@@ -1,0 +1,261 @@
+# 18 "hotspot.c"
+double t_chip = 0.0005;
+double chip_height = 0.016;
+double chip_width = 0.016;
+
+double amb_temp = 80.0;
+
+int num_omp_threads;
+
+void print(double* temp)
+{
+ int i;
+ for(i=0;i<64;i++) {
+  if(i!=0) printf(" ");
+  printf("%g",temp[i]);
+ }
+ printf("\n");
+}
+
+
+
+
+
+void single_iteration(double *result, double *temp, double *power, int row, int col,
+       double Cap, double Rx, double Ry, double Rz,
+       double step)
+{
+ double delta;
+ int r, c;
+
+
+
+
+
+
+ for (r = 0; r < row; r++) {
+  for (c = 0; c < col; c++) {
+
+   if ( (r == 0) && (c == 0) ) {
+    delta = (step / Cap) * (power[0] +
+      (temp[1] - temp[0]) / Rx +
+      (temp[col] - temp[0]) / Ry +
+      (amb_temp - temp[0]) / Rz);
+
+
+   }
+   else if ((r == 0) && (c == col-1)) {
+    delta = (step / Cap) * (power[c] +
+      (temp[c-1] - temp[c]) / Rx +
+      (temp[c+col] - temp[c]) / Ry +
+      (amb_temp - temp[c]) / Rz);
+   }
+   else if ((r == row-1) && (c == col-1)) {
+    delta = (step / Cap) * (power[r*col+c] +
+      (temp[r*col+c-1] - temp[r*col+c]) / Rx +
+      (temp[(r-1)*col+c] - temp[r*col+c]) / Ry +
+      (amb_temp - temp[r*col+c]) / Rz);
+   }
+   else if ((r == row-1) && (c == 0)) {
+    delta = (step / Cap) * (power[r*col] +
+      (temp[r*col+1] - temp[r*col]) / Rx +
+      (temp[(r-1)*col] - temp[r*col]) / Ry +
+      (amb_temp - temp[r*col]) / Rz);
+   }
+   else if (r == 0) {
+    delta = (step / Cap) * (power[c] +
+      (temp[c+1] + temp[c-1] - 2.0*temp[c]) / Rx +
+      (temp[col+c] - temp[c]) / Ry +
+      (amb_temp - temp[c]) / Rz);
+   }
+   else if (c == col-1) {
+    delta = (step / Cap) * (power[r*col+c] +
+      (temp[(r+1)*col+c] + temp[(r-1)*col+c] - 2.0*temp[r*col+c]) / Ry +
+      (temp[r*col+c-1] - temp[r*col+c]) / Rx +
+      (amb_temp - temp[r*col+c]) / Rz);
+   }
+   else if (r == row-1) {
+    delta = (step / Cap) * (power[r*col+c] +
+      (temp[r*col+c+1] + temp[r*col+c-1] - 2.0*temp[r*col+c]) / Rx +
+      (temp[(r-1)*col+c] - temp[r*col+c]) / Ry +
+      (amb_temp - temp[r*col+c]) / Rz);
+   }
+   else if (c == 0) {
+    delta = (step / Cap) * (power[r*col] +
+      (temp[(r+1)*col] + temp[(r-1)*col] - 2.0*temp[r*col]) / Ry +
+      (temp[r*col+1] - temp[r*col]) / Rx +
+      (amb_temp - temp[r*col]) / Rz);
+   }
+   else {
+    delta = (step / Cap) * (power[r*col+c] +
+      (temp[(r+1)*col+c] + temp[(r-1)*col+c] - 2.0*temp[r*col+c]) / Ry +
+      (temp[r*col+c+1] + temp[r*col+c-1] - 2.0*temp[r*col+c]) / Rx +
+      (amb_temp - temp[r*col+c]) / Rz);
+   }
+
+
+   result[r*col+c] =temp[r*col+c]+ delta;
+
+
+  }
+ }
+
+
+
+
+
+ for (r = 0; r < row; r++) {
+  for (c = 0; c < col; c++) {
+   temp[r*col+c]=result[r*col+c];
+  }
+ }
+}
+
+
+
+
+
+void compute_tran_temp(double *result, int num_iterations, double *temp, double *power, int row, int col)
+{
+
+
+
+
+ double grid_height = chip_height / row;
+ double grid_width = chip_width / col;
+
+ double Cap = 0.5 * 1.75e6 * t_chip * grid_width * grid_height;
+ double Rx = grid_width / (2.0 * 100 * t_chip * grid_height);
+ double Ry = grid_height / (2.0 * 100 * t_chip * grid_width);
+ double Rz = t_chip / (100 * grid_height * grid_width);
+
+ double max_slope = (3.0e6) / (0.5 * t_chip * 1.75e6);
+ double step = 0.001 / max_slope;
+ double t;
+
+
+
+
+
+
+     for (int i = 0; i < num_iterations ; i++)
+ {
+
+
+
+
+  single_iteration(result, temp, power, row, col, Cap, Rx, Ry, Rz, step);
+
+ }
+
+
+
+
+}
+
+void fatal(char *s)
+{
+ fprintf(stderr, "error: %s\n", s);
+ exit(1);
+}
+
+void read_input(double *vect, int grid_rows, int grid_cols, char *file)
+{
+   int i, index;
+ FILE *fp;
+ char str[256];
+ double val;
+
+ fp = fopen (file, "r");
+ if (!fp)
+  fatal ("file could not be opened for reading");
+
+ for (i=0; i < grid_rows * grid_cols; i++) {
+  fgets(str, 256, fp);
+  if (feof(fp))
+   fatal("not enough lines in file");
+  if ((sscanf(str, "%lf", &val) != 1) )
+   fatal("invalid file format");
+  vect[i] = val;
+ }
+
+ fclose(fp);
+}
+
+void usage(int argc, char **argv)
+{
+ fprintf(stderr, "Usage: %s <grid_rows> <grid_cols> <sim_time> <no. of threads><temp_file> <power_file>\n", argv[0]);
+ fprintf(stderr, "\t<grid_rows>  - number of rows in the grid (positive integer)\n");
+ fprintf(stderr, "\t<grid_cols>  - number of columns in the grid (positive integer)\n");
+ fprintf(stderr, "\t<sim_time>   - number of iterations\n");
+ fprintf(stderr, "\t<no. of threads>   - number of threads\n");
+ fprintf(stderr, "\t<temp_file>  - name of the file containing the initial temperature values of each cell\n");
+ fprintf(stderr, "\t<power_file> - name of the file containing the dissipated power values of each cell\n");
+ exit(1);
+}
+
+void writefile(double* temp,int row, int col)
+{
+    int i,j;
+ FILE* fp;
+ if(fp=fopen("data.out","w")) {
+  for(i=0;i<row;i++) {
+   for(j=0;j<col;j++) {
+    if(j!=0) fprintf(fp," ");
+    fprintf(fp,"%g",temp[i*col+j]);
+   }
+   fprintf(fp,"\n");
+  }
+ }
+ else { printf("write file error\n"); exit(99); }
+}
+
+int main(int argc, char **argv)
+{
+ int grid_rows, grid_cols, sim_time, i;
+ double *temp, *power, *result;
+ char *tfile, *pfile;
+
+
+ if (argc != 7)
+  usage(argc, argv);
+ if ((grid_rows = atoi(argv[1])) <= 0 ||
+  (grid_cols = atoi(argv[2])) <= 0 ||
+  (sim_time = atoi(argv[3])) <= 0 ||
+  (num_omp_threads = atoi(argv[4])) <= 0
+  )
+  usage(argc, argv);
+
+
+ temp = (double *) calloc (grid_rows * grid_cols, sizeof(double));
+ power = (double *) calloc (grid_rows * grid_cols, sizeof(double));
+ result = (double *) calloc (grid_rows * grid_cols, sizeof(double));
+ if(!temp || !power)
+  fatal("unable to allocate memory");
+
+
+ tfile = argv[5];
+ pfile = argv[6];
+ read_input(temp, grid_rows, grid_cols, tfile);
+ read_input(power, grid_rows, grid_cols, pfile);
+
+ printf("Start computing the transient temperature\n");
+ double start_time = clock(), end_time;
+ compute_tran_temp(result,sim_time, temp, power, grid_rows, grid_cols);
+        end_time = clock();
+ printf("Ending simulation\n");
+
+ printf("The elapsed time (ms): %lf\n",(end_time-start_time)/
+# 264 "hotspot.c" 3 4
+                                                            ((clock_t) 1000000)
+# 264 "hotspot.c"
+                                                                          *1000);
+        printf("Total: %d\n",sim_time);
+# 284 "hotspot.c"
+ writefile(temp, grid_rows, grid_cols);
+
+ free(temp);
+ free(power);
+
+ return 0;
+}
