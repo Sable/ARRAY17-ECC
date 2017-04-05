@@ -2,11 +2,8 @@
 double t_chip = 0.0005;
 double chip_height = 0.016;
 double chip_width = 0.016;
-
 double amb_temp = 80.0;
-
 int num_omp_threads;
-
 void print(double* temp)
 {
  int i;
@@ -16,23 +13,12 @@ void print(double* temp)
  }
  printf("\n");
 }
-
-
-
-
-
 void single_iteration(double *result, double *temp, double *power, int row, int col,
        double Cap, double Rx, double Ry, double Rz,
        double step)
 {
  double delta;
  int r, c;
-
-
-
-
-
-
  for (r = 0; r < row; r++) {
   for (c = 0; c < col; c++) {
 
@@ -92,35 +78,17 @@ void single_iteration(double *result, double *temp, double *power, int row, int 
       (temp[r*col+c+1] + temp[r*col+c-1] - 2.0*temp[r*col+c]) / Rx +
       (amb_temp - temp[r*col+c]) / Rz);
    }
-
-
    result[r*col+c] =temp[r*col+c]+ delta;
-
-
   }
  }
-
-
-
-
-
  for (r = 0; r < row; r++) {
   for (c = 0; c < col; c++) {
    temp[r*col+c]=result[r*col+c];
   }
  }
 }
-
-
-
-
-
 void compute_tran_temp(double *result, int num_iterations, double *temp, double *power, int row, int col)
 {
-
-
-
-
  double grid_height = chip_height / row;
  double grid_width = chip_width / col;
 
@@ -132,25 +100,11 @@ void compute_tran_temp(double *result, int num_iterations, double *temp, double 
  double max_slope = (3.0e6) / (0.5 * t_chip * 1.75e6);
  double step = 0.001 / max_slope;
  double t;
-
-
-
-
-
-
      for (int i = 0; i < num_iterations ; i++)
  {
-
-
-
-
   single_iteration(result, temp, power, row, col, Cap, Rx, Ry, Rz, step);
 
  }
-
-
-
-
 }
 
 void fatal(char *s)
@@ -216,7 +170,6 @@ int main(int argc, char **argv)
  double *temp, *power, *result;
  char *tfile, *pfile;
 
-
  if (argc != 7)
   usage(argc, argv);
  if ((grid_rows = atoi(argv[1])) <= 0 ||
@@ -226,13 +179,11 @@ int main(int argc, char **argv)
   )
   usage(argc, argv);
 
-
  temp = (double *) calloc (grid_rows * grid_cols, sizeof(double));
  power = (double *) calloc (grid_rows * grid_cols, sizeof(double));
  result = (double *) calloc (grid_rows * grid_cols, sizeof(double));
  if(!temp || !power)
   fatal("unable to allocate memory");
-
 
  tfile = argv[5];
  pfile = argv[6];
@@ -242,7 +193,7 @@ int main(int argc, char **argv)
  printf("Start computing the transient temperature\n");
  double start_time = clock(), end_time;
  compute_tran_temp(result,sim_time, temp, power, grid_rows, grid_cols);
-        end_time = clock();
+ end_time = clock();
  printf("Ending simulation\n");
 
  printf("The elapsed time (ms): %lf\n",(end_time-start_time)/
@@ -251,11 +202,8 @@ int main(int argc, char **argv)
 # 264 "hotspot.c"
                                                                           *1000);
         printf("Total: %d\n",sim_time);
-# 284 "hotspot.c"
  writefile(temp, grid_rows, grid_cols);
-
  free(temp);
  free(power);
-
  return 0;
 }
