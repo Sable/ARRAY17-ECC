@@ -6,7 +6,7 @@ else
     n=$1
 fi
 
-arg_list=( 256 512 1024 2048 )
+arg_list=( 128 256 512 1024 )
 id=${arg_list[${n}]}
 
 arg=data/in_${id}K
