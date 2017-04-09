@@ -1,7 +1,7 @@
 #!/bin/bash
 
 benchDirs=( blackscholes hotspot kmeans morgan rprime )
-#benchDirs=( blackscholes )
+#benchDirs=( morgan )
 
 start_time=`date +%s`
 

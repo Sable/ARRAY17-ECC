@@ -1,5 +1,4 @@
 #!/bin/bash
-# 256 / 512 / 1024 / 2048
 if [ "$#" -ne 1 ]; then
     n=0
 else
@@ -14,13 +13,13 @@ log=morgan${n}.log
 
 rm -f ${log}
 echo "#Input with ${arg}" > ${log}
-echo "5" >> ${log}
+echo "10" >> ${log}
 
-echo "Executing $arg 5 times"
+echo "Executing $arg 10 times"
 
 ## warm up
-./mg ${arg} &> /dev/null
-for i in {1..5}
+#./mg ${arg} &> /dev/null
+for i in {1..10}
 do
     ./mg ${arg} | grep "elapsed time" | awk -F\: '{print $2}' >> ${log}
 done

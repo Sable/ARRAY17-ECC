@@ -321,7 +321,7 @@ int main(int argc, char**  argv){
     array* r = morgan(n, x, y);
     gettimeofday(&tv2, NULL);  // time_end
     printf("The elapsed time (ms): %lf\n", getTime(tv1,tv2));
-    printArray(r);
+    //printArray(r);
     tryFreeArray(x);
     tryFreeArray(y);
     tryFreeArray(r);

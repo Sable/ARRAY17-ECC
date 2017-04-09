@@ -108,6 +108,11 @@ main(int argc, char * argv[])
 //  printf("\n execution time in ms %d\n",time2-time1);
   printf("\n The elapsed time in ms: %g\n",(time2-time1)/1000.0);
 /*   OUTPUT generates the following code */
+/*printf("Result:\n");
+for(u0=0; u0<10; u0++){
+    printf(" %g", fretfp[u0]);
+}
+printf("\n");*/
 /*  p2 = fretfp;
   w0 = cad[3];
 w1= cad[1]/w0;
@@ -315,7 +320,7 @@ lj19:
 /******************   LINE 19   ******************/
  v26 = v26+1; /* code for + */
 /*     PFCOMPB generates the folowing code    */
-   v8 = 2< v26;
+   v8 = 20< v26;
    if (v8!=0)
    goto lj28;
 lj20:
@@ -438,7 +443,7 @@ if (v34.dims[0] != v19.dims[0])
 if (v34.dims[1] != v19.dims[1])
   LEMSG(169,22);
 lo1 = (  int  *) v34.valp;
-ro2 = (double *) v19.valp;
+ro20 = (double *) v19.valp; // ro2 = (double *) v19.valp;
 r0= v28.reall;
   r0=v29.reall;
 if (v28.dims[0] != v29.dims[0])
@@ -461,7 +466,8 @@ INCHEAPP3(v30,inchp2); /* by INCHEAPP */
 p2 = (double *) v30.valp;
 lo20 = (double *) v29.valp;
   for (v1 =0; v1<r0; v1++) /* code for - */
-     p2[v1] = (lo2[v1]+ro2[v1])-lo1[v1]*ro2[v1];
+     p2[v1] = (lo2[v1]+ro2[v1])-lo1[v1]*ro20[v1];
+     //p2[v1] = (lo2[v1]+ro2[v1])-lo1[v1]*ro2[v1];
 /******************   LINE 23   ******************/
 /*   PFDROP generates the following code */
    r0=2;
@@ -568,7 +574,7 @@ if (v35.dims[0] != v19.dims[0])
 if (v35.dims[1] != v19.dims[1])
   LEMSG(192,25);
 lo1 = (  int  *) v35.valp;
-ro2 = (double *) v19.valp;
+ro20 = (double *) v19.valp; //ro2 = (double *) v19.valp;
 r0= v31.reall;
   r0=v32.reall;
 if (v31.dims[0] != v32.dims[0])
@@ -591,7 +597,21 @@ INCHEAPP3(v33,inchp2); /* by INCHEAPP */
 p2 = (double *) v33.valp;
 lo20 = (double *) v32.valp;
   for (v1 =0; v1<r0; v1++) /* code for - */
-     p2[v1] = (lo2[v1]+ro2[v1])-lo1[v1]*ro2[v1];
+     p2[v1] = (lo2[v1]+ro2[v1])-lo1[v1]*ro20[v1];
+     //p2[v1] = (lo2[v1]+ro2[v1])-lo1[v1]*ro2[v1];
+/*
+m1: 28
+m2: 29
+x : 30
+n1: 31
+n2: 32
+y : 33
+c1: 34
+*/
+/*printf("c1\n");
+for(u0=0; u0<10; u0++){
+    printf(" %d", ((int*)v34.valp)[u0]);
+}*/
 /******************   LINE 26   ******************/
   r0=v19.reall;
   cad[31]=r0;
@@ -663,7 +683,7 @@ if (cad[33] != v20.dims[1])
 lo2 = (double *) v20.valp;
   for (v1 =0; v1<cad[31]; v1++) /* code for + */
     v6[v1] = lo2[v1]+v6[v1];
- v10 = (1.458333e-7)/v21; /* code for % */
+ v10 = (1.458333333e-7)/v21; /* code for % */
   for (v1 =0; v1<cad[31]; v1++) /* code for * */
     v6[v1] = v10*v6[v1];
 r0= v19.reall;
@@ -675,6 +695,11 @@ p2 = (double *) v19.valp;
 lo2 = (double *) v19.valp;
   for (v1 =0; v1<v19.reall; v1++) /* code for + */
      p2[v1] = lo2[v1]+v6[v1];
+/*printf("temp:\n");
+for(u0=0; u0<10; u0++){
+    printf(" %g", ((double*)v19.valp)[u0]);
+}
+printf("\n");*/
 /******************   LINE 27   ******************/
   goto lj19;
 lj28:

@@ -7,9 +7,31 @@ def main(args):
         print "Usage: ",args[0]," file"
         sys.exit(1)
     avg = calc(args[1])
-    for v in avg:
-        print "%lf" % (v) ,
-    print ""
+    printVector(avg)
+
+def printVector(vec):
+    print "%.lf" % vec[0] ,
+    for v in vec[1:]:
+        print "& %.lf" % (v) ,
+    print "\\\\ \\hline"
+
+def calcBase(v):
+    minValue = 100000000
+    maxValue = -1
+    for k in v:
+        if minValue > k:
+            minValue = k
+    for k in v:
+        if maxValue < k:
+            maxValue = k
+    base = (maxValue - minValue) * 0.5
+    return base, (base - minValue)
+
+def mean(v):
+    s = 0
+    for k in v:
+        s = s + k
+    return (s / len(v))
 
 def calc(filename):
     fp = open(filename, "r")
@@ -27,6 +49,7 @@ def calc(filename):
             if num != -1:
                 average.append(total / num)
                 total = 0
+                subdev = []
             continue
         else:
             num = int(line)

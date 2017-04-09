@@ -30,19 +30,13 @@ xLocal_2 <- (xK2_2 * _0.356563782) + (xK2_3 * 1.781477937) + (xK2_4 * _1.8212559
 
 OutputX<-(sign * 1.0 - xLocal) + (~sign) * xLocal <- 1.0 - xNPrimeofX * xLocal_2 + xLocal_1
 @.
-
 @.t<-test_bs n;t
 start<-[]AI 2
 t<-0
 LN0:->(n<t<-t+1)/LN1
-//BlkSchlsEqEuroNoDiv (d_s;d_strike;d_r;d_v;d_t;d_OptionType=='P';0)
 BlkSchlsEqEuroNoDiv
 ->LN0
-LN1: t<-(end<-[]AI 2)-start
-//[]<-'Average time: ',(+.(( []AI 2)-ft)%n*1000),'ms'
-//[]<-'Number of Options: ',+.#d_s
-//[]<-'Number of runs: ',+.n
-//[]<-OptionPrice
+LN1: t<-((end<-[]AI 2)-start)%n
 @.
 
 @.scale test k;i;t;total;avg_time;sptprice;strike;rate;volatility;time;otype;timet

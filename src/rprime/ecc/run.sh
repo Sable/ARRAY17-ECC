@@ -14,13 +14,13 @@ log=rprime${n}.log
 
 rm -f ${log}
 echo "#Input with ${arg}" > ${log}
-echo "5" >> ${log}
+echo "10" >> ${log}
 
-echo "Executing $arg 5 times"
+echo "Executing $arg 10 times"
 
 ## warm up
-./rp ${arg} &> /dev/null
-for i in {1..5}
+## ./rp ${arg} &> /dev/null
+for i in {1..10}
 do
     ./rp ${arg} | grep "elapsed time" | awk -F\: '{print $2}' >> ${log}
 done

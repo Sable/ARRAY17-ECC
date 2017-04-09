@@ -615,27 +615,36 @@ lo2 = (double *) v52.valp;
      p2[v1] = lo2[v1]*0.31938153;
 /******************   LINE 6   ******************/
   r0=v56.reall;
-lo2 = (double *) v56.valp;
-lo2 = (double *) v55.valp;
+lo20 = (double *) v56.valp; //lo2 = (double *) v56.valp;
+lo21 = (double *) v55.valp; //lo2 = (double *) v55.valp;
 r0= v55.reall;
   if (r0!=v56.reall && r0!=1)
   LEMSG(135,6);
-lo20 = (double *) v55.valp;
-lo2 = (double *) v54.valp;
+//lo20 = (double *) v55.valp;
+lo22 = (double *) v54.valp; //lo2 = (double *) v54.valp;
 r0= v54.reall;
   if (r0!=v56.reall && r0!=1)
   LEMSG(131,6);
-lo20 = (double *) v54.valp;
-lo2 = (double *) v53.valp;
+//lo20 = (double *) v54.valp;
+lo23 = (double *) v53.valp; //lo2 = (double *) v53.valp;
 r0= v53.reall;
   if (r0!=v56.reall && r0!=1)
   LEMSG(127,6);
 INCHEAPP3(v59,inchp2); /* by INCHEAPP */
 p2 = (double *) v59.valp;
-lo20 = (double *) v53.valp;
+lo23 = (double *) v53.valp; //lo20 = (double *) v53.valp;
   for (v1 =0; v1<r0; v1++) /* code for + */
-     p2[v1] = lo2[v1]*(-0.35656378)+(lo2[v1]*1.78147793+(lo2[v1]*(
--1.82125597)+lo2[v1]*1.33027442));
+     p2[v1] = lo23[v1]*(-0.35656378)+(lo22[v1]*1.78147793+(lo21[v1]*(
+-1.82125597)+lo20[v1]*1.33027442));
+     //p2[v1] = lo2[v1]*(-0.35656378)+(lo2[v1]*1.78147793+(lo2[v1]*(
+//-1.82125597)+lo2[v1]*1.33027442));
+/*
+xK2_2: v53 -> lo23
+xK2_3: v54 -> lo22
+xK2_4: v55 -> lo21
+xK2_5: v56 -> lo20
+xLocal_2: 59
+*/
 /******************   LINE 7   ******************/
 r0= v59.reall;
   if (r0!=v58.reall && r0!=1)

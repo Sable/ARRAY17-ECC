@@ -30,21 +30,18 @@ L1:z <- temp
 //[]<-' finish ',(+.k-1),' iterations'
 @.
 
-@.t<-test_hotspot n;t0;t1;x;i;start;end;res
+@.t<-test_hotspot ;start;end;res
 start <- []AI 2
-i <- 0
-L0:->(n < i <- i + 1)/L1
- res <- temp hotspot power
-->L0
-L1: end <- []AI 2
+res <- temp hotspot power
+end <- []AI 2
 t <- end - start
 @.
 
 @.scale test k;t0;i;total;t0;avg_time
 i<-total<-0
-t0<-test_hotspot 10
+t0<-test_hotspot
 L1:->(i>=k)/L0
- total<-total+t<-test_hotspot 10
+ total<-total+t<-test_hotspot
  []<-t%1000
  i<-i+1
  ->L1

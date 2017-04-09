@@ -479,7 +479,7 @@ int main (int argc, char **argv)
     //printf("The elapsed time (ms): %lf\n",(((double)(clock()-ft))/CLOCKS_PER_SEC)/NUM_RUNS*1000);
     printf("The elapsed time (ms): %lf\n",(end_time-start_time)/CLOCKS_PER_SEC/NUM_RUNS*1000);
     //Write prices to output file
-    /*
+    
     file = fopen(outputFile, "w");
     if(file == NULL) {
       printf("ERROR: Unable to open file `%s'.\n", outputFile);
@@ -491,7 +491,7 @@ int main (int argc, char **argv)
       fclose(file);
       exit(1);
     }
-    if(1==0){
+    if(1==1){
         for(i=0; i<numOptions; i++) {
             rv = fprintf(file, "%.18f\n", prices[i]);
             if(rv < 0) {
@@ -506,7 +506,7 @@ int main (int argc, char **argv)
       printf("ERROR: Unable to close file `%s'.\n", outputFile);
       exit(1);
     }
-    */
+    
 
 #ifdef ERR_CHK
     printf("Num Errors: %d\n", numError);

@@ -22,7 +22,7 @@ t<-end-start
 
 @.scale test k;i;total;t0;avg_time
 i<-total<-0
-t0<-test_morgan
+//t0<-test_morgan
 L1:->(i>=k)/L0
  total<-total+t<-test_morgan
  []<-t%1000
@@ -33,13 +33,13 @@ L0:
 @.
 
 )fcopy in_128K
-128 test 5
+128 test 10
 
 )fcopy in_256K
-256 test 5
+256 test 10
 
 )fcopy in_512K
-512 test 5
+512 test 10
 
 )fcopy in_1024K
-1024 test 5
+1024 test 10

@@ -13,13 +13,13 @@ log=blackscholes${n}.log
 
 rm -f ${log}
 echo "#Input with $arg" > ${log}
-echo "5" >> ${log}
+echo "10" >> ${log}
 
-echo "Executing $arg 5 times"
+echo "Executing $arg 10 times"
 
 ## warm up
-./bs ${arg} &> /dev/null
-for i in {1..5}
+## ./bs ${arg} &> /dev/null
+for i in {1..10}
 do
     ./bs ${arg} | grep "elapsed time" | awk -F\: '{print $2}' >> ${log}
 done
