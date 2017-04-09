@@ -65,11 +65,17 @@ void printVector(vector *p){
 void printBit(int x, int n){
     int i;
     if(n < 0) n = 32;
+    printf("===\n");
     for(i=0; i<n; i++){
-        printf(" %d", (x<0));
+        printf("%3d", i+1);
+    }
+    printf("\n");
+    for(i=0; i<n; i++){
+        printf("%3d", (x<0));
         x <<= 1;
     }
     printf("\n");
+    printf("===\n");
 }
 
 vector* rprime(int n){
@@ -153,9 +159,8 @@ L2:
     blockTotal = n >> 5;
     blockRemain= n - (blockTotal << 5);
     blockAll   = blockTotal + 1;
-    printf("len = %d\n", len);
     // wrapmove
-    for(i=0, j=0; i<blockTotal;){
+    for(i=0, j=0; i<blockAll;){
         if(j>0) tempBool[i] = 1;
         newLen = j + len;
         if(newLen < 32){
@@ -170,39 +175,18 @@ L2:
         }
         else {
             //printf("j = %d, len = %d, newLen = %d\n", j,len,newLen);
+            tempBool[i] <<= 32 - j; //shift before move to next line
             i += newLen / 32;
             j  = newLen % 32;
         }
     }
-    t = 5;
-    if(len == t)
-        printf("value = %d, n = %d, j = %d\n", i*32+j,n,j);
-    if(i==blockTotal){
-        if(j>0) tempBool[blockTotal] = 1,j--;
-        newLen = j + len;
-        if(len == t)
-            printf("j = %d, blockRemain = %d\n", j,blockRemain);
-        if(len == t)
-            printBit(tempBool[blockTotal], -1);
-        if(newLen < 32){
-            for(; j<blockRemain; j+=len){
-                tempBool[blockTotal] = (tempBool[blockTotal] << len) | 1;
-            }
-            if(len == t)
-                printBit(tempBool[blockTotal], -1);
-            if(len == t)
-                printf("len = %d, j = %d\n", len,j);
-            if(j>blockRemain){
-                //tempBool[blockTotal] <<= len - (j - blockRemain);
-                tempBool[blockTotal] <<= len - j;
-            }
-        }
-        tempBool[blockTotal] <<= (32 - blockRemain);
-        if(len == t){
-            printf("newLen = %d, len =%d \n", newLen,len);
-            printBit(tempBool[blockTotal], -1);
-            printf("---\n");
-        }
+    if(i==blockAll){
+        t = tempBool[blockTotal];
+        int cleanBit = 0;
+        for(i=0; i<blockRemain;i++)
+            cleanBit = (cleanBit<<1) | 1;
+        cleanBit <<= 32-blockRemain;
+        tempBool[blockTotal] &= cleanBit;
     }
     for(i=0; i<blockAll;i++){
         b[i] = b[i] | tempBool[i];
@@ -212,6 +196,11 @@ L2:
         tryFree(tempBool);
         goto L2;
     }
+    /*printf("output:\n");
+    for(i=0; i<blockAll; i++){
+        printf("i = %d\n", i);
+        printBit(b[i], -1);
+    }*/
     size    = 0;
     for(i=0; i<blockTotal; i++){
         t = b[i];
