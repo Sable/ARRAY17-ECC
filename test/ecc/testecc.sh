@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #benchDirs=( blackscholes hotspot kmeans morgan rprime )
-benchDirs=( morgan )
+benchDirs=( kmeans )
 
 echo === List of benchmarks ===
 

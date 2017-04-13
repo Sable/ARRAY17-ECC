@@ -222,11 +222,11 @@ int main(int argc, char **argv) {
 
 	printf("number of Clusters %d\n",nclusters); 
 	printf("number of Attributes %d\n\n",numAttributes); 
-  /*  	printf("Cluster Centers Output\n"); 
+    	printf("Cluster Centers Output\n"); 
 	printf("The first number is cluster number and the following data is arribute value\n");
 	printf("=============================================================================\n\n");
 	
-    for (i=0; i< nclusters; i++) {
+/*    for (i=0; i< nclusters; i++) {
 		printf("%d: ", i);
         for (j=0; j<numAttributes; j++)
             printf("%.2f ", cluster_centres[i][j]);

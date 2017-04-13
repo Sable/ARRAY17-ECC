@@ -62,16 +62,6 @@ L0:
 
 []IO<-0
 inv_sqrt_2xPI <- 0.39894228040143270286
+num_run<-10
 
-)fcopy in_1M
-10 test 5
-
-)fcopy in_2M
-10 test 5
-
-)fcopy in_4M
-10 test 5
-
-)fcopy in_8M
-10 test 5
 

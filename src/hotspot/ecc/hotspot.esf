@@ -8,7 +8,7 @@ K_SI<- 100
 SPEC_HEAT_SI <- 1750000
 PRECISION <- 0.001
 MAX_PD <- 3000000
-cnt <- 2 // number of iteration
+cnt <- 20 // number of iteration
 Cap <- FACTOR_CHIP * SPEC_HEAT_SI * t_chip * (gw <- width % col <- _1^.#temp) * gh <- height % row <- 1^.#temp
 Rx <- gw % (2.0 * K_SI * t_chip * gh)
 Ry <- gh % (2.0 * K_SI * t_chip * gw)

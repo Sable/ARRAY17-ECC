@@ -32,14 +32,16 @@ L0:
  []<-'The elapsed time is (ms): ',+.avg_time<-total%k*1000
 @.
 
+num_run<-10
+
 )fcopy in_128K
-128 test 10
+128 test num_run
 
 )fcopy in_256K
-256 test 10
+256 test num_run
 
 )fcopy in_512K
-512 test 10
+512 test num_run
 
 )fcopy in_1024K
-1024 test 10
+1024 test num_run

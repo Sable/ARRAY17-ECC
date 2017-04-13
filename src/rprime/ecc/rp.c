@@ -55,6 +55,7 @@
    STOFM3 v30;
    STOFM2 v31;
    STOFM3 v32;
+   //int totalWrapMoveTime = 0;
 main(int argc, char * argv[])
  {char * lparm, * rparm;
   char  ltype, rtype;
@@ -88,6 +89,7 @@ main(int argc, char * argv[])
   time2 = apl_sec();
   //printf("\n execution time in ms %d\n",time2-time1);
   printf("\n The elapsed time in ms: %g\n",(time2-time1)/1000.0);
+  //printf("Total wrapmove time in ms: %g\n", totalWrapMoveTime/1000.0);
 /*   OUTPUT generates the following code */
 /*  p1 = fretip;
 if(cad[1]<21) for(v1=0;v1<cad[1];v1++){printf("%d ",*p1);++p1;}
@@ -215,7 +217,9 @@ if ((tl=r0&0x0000001f)==0)
 ro0 = (  int  *) v23.valp;
   r0=v19;
 cad[1]=r0;
+//int chf0 = clock();
   wrapmove(v4, ro0, r0, v23.reall);
+//totalWrapMoveTime += clock()-chf0;
   cad[11] = cad[1];
 r0= v21.reall;
   if (r0!=cad[11] && r0!=1)

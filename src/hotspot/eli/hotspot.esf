@@ -50,15 +50,16 @@ L0:
 @.
 
 []IO<-0
+num_run<-10
 
 )fcopy h_256
-256 test 5
+256 test num_run
 
 )fcopy h_512
-512 test 5
+512 test num_run
 
 )fcopy h_1024
-1024 test 5
+1024 test num_run
 
 )fcopy h_2048
-2048 test 5
+2048 test num_run

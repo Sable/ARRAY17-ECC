@@ -9,7 +9,7 @@ fi
 arg_list=( 256 512 1024 2048 )
 id=${arg_list[$n]}
 
-arg=data/hot${id}
+arg=../ecc/data/hot${id}
 log=hotspot${n}.log
 
 rm -f ${log}

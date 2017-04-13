@@ -284,7 +284,7 @@ INCHEAPPH(v35,inchp1, p1 = (   int  *) cad0 ); /* by INCHEAPP */
    r0=v35.reall;
 INCHEAPP3(v34,inchp1); /* by INCHEAPP */
 #ifdef ELI_OPT
-  printf("[Line %d] copied %d\n", 276, v35.reall<<2);
+  //printf("[Line %d] copied %d\n", 276, v35.reall<<2);
 #endif
    memcpy(v34.valp, v35.valp, v35.reall<<2);
 /******************   LINE 17   ******************/
@@ -827,14 +827,13 @@ printf("\n");*/
 /******************   LINE 27   ******************/
   goto lj19;
 lj28:
-printf("v26 = %d\n", v26);
 /******************   LINE 28   ******************/
   for (v1=0; v1<2; v1++)
   v18.dims[v1+0]=  v19.dims[v1+0];
    r0=v19.reall;
 INCHEAPP3(v18,inchp2); /* by INCHEAPP */
 #ifdef ELI_OPT
-  printf("[Line %d] copied %d\n", 712, v19.reall<<2);
+  //printf("[Line %d] copied %d\n", 712, v19.reall<<2);
 #endif
    memcpy(v18.valp, v19.valp, v19.reall<<3);
 lj0:;

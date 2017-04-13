@@ -48,6 +48,8 @@
    STOFM3 v48;
    STOFM2 v49;
    STOFM3 v50;
+   int totalTime = 0;
+   int chf0;
 main(int argc, char * argv[])
  {char * lparm, * rparm;
   char  ltype, rtype;
@@ -99,6 +101,7 @@ main(int argc, char * argv[])
   time2 = apl_sec();
   //printf("\n execution time in ms %d\n",time2-time1);
   printf("\n The elapsed time in ms: %g\n",(time2-time1)/1000.0);
+  printf("Indexa time in ms: %g\n", totalTime/1000.0);
 /*   OUTPUT generates the following code */
 /*  p2 = fretfp;
   w0 = cad[3];
@@ -406,6 +409,7 @@ ro2 = (double *) v41.valp;
   for (v1 =0; v1<r0; v1++) /* code for + */
      p2[v1] = v6[v1]+ro2[v1];
 /* INDEXA generates the following code */
+chf0 = clock();
 p2 = (double *) v30.valp;
 lo2 = (double *) v30.valp;
 ro2 = (double *) v42.valp;
@@ -418,6 +422,7 @@ ro2 = (double *) v42.valp;
   r0=v30.dims[1]     ;
   for (u0=0; u0<v30.dims[1]     ; u0++)
    p2[n+dl[1]*u0] = ro2[u0];
+totalTime += clock() - chf0;
 /******************   LINE 8   ******************/
 /* INDEXV generates the following code */
 lo1 = (  int  *) v31.valp;
