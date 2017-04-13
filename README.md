@@ -37,15 +37,15 @@ without the help of the ELI interpreter, called **ECC**.
 
 System information
 
-    - Name : Lynx
-    - OS   : Ubuntu 16.04.2 LTS
-    - GCC  : 5.4.0
-    - ELI  : v0.1a [download](http://fastarray.appspot.com/array17/eli_linux_0.1a.tar.gz)
+- Name : Lynx
+- OS   : Ubuntu 16.04.2 LTS
+- GCC  : 5.4.0
+- ELI  : v0.1a [download](http://fastarray.appspot.com/eli_linux_0.1a.tar.gz)
 
 Data download
 
-    - Experimental data [[download, 163MB](http://www.sable.mcgill.ca/~hanfeng.c/array17/experiment-data.tar.gz)] (After unzipped, about 4GB)
-    - Source code [[download](/releases/latest)]
+- Experimental data [[download, 163MB](http://www.sable.mcgill.ca/~hanfeng.c/array17/experiment-data.tar.gz)] (After unzipped, about 4GB)
+- Source code [[download](/releases/latest)]
 
 Benchmark versions:
 
