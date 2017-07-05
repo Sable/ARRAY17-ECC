@@ -44,7 +44,7 @@ System information
 
 Data download
 
-- Experimental data [[download, 163MB](http://www.sable.mcgill.ca/~hanfeng.c/array17/experiment-data.tar.gz)] (After unzipped, about 4GB)
+- Experiment data [[download, 138MB](http://www.sable.mcgill.ca/~hanfeng.c/array17/experiment-data.tar.gz)] (After unzipped, about 4GB)
 - Source code [[download](/releases/latest)]
 
 Benchmark versions:
